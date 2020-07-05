@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+    <node pkg="mover" type="mover.py" name="mover" output="screen"/>
+    <node pkg="mover" type="pos_move.py" name="pos_move" output="screen"/>
+    <node pkg="mover" type="posinput.py" name="posinput" output="screen"/>	
+ </launch>
