@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch>
+    <node pkg="obstacle" type="mover.py" name="mover" output="screen"/>
+    <node pkg="obstacle" type="scanner.py" name="scanner" output="screen"/>
+    <node pkg="obstacle" type="posinput.py" name="posinput" output="screen"/>	
+ </launch>
