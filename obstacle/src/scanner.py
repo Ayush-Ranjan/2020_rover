@@ -61,7 +61,7 @@ def scan(data):
             if(abs(i-180)<mindis):
                 mindis=abs(i-180)
                 c=i
-    print("nearest",180-c)
+    #print("nearest",180-c)
     if(180-c>5):
         angle_add=(180-c)*data.angle_increment
 def move():
@@ -69,9 +69,11 @@ def move():
     director=rospy.Publisher('cmd_vel',Twist,queue_size=10)
     if eul is not None:
         yaw=eul[2]
+        #print(yaw)
         dist = math.sqrt((dest_x-curr_pos_x)*(dest_x-curr_pos_x)+(dest_y-curr_pos_y)*(dest_y-curr_pos_y))
         angle=(yaw+math.atan((-1*dest_y-curr_pos_y)/(dest_x-curr_pos_x)))*180/math.pi
         angle2=0
+        #print(curr_pos_y)
         if(curr_pos_x-dest_x<0):
             if(yaw<0):
                 angle=angle+180
@@ -82,11 +84,11 @@ def move():
             angle=0
         else:
             if(flag==True):
-                angle=angle_add*36/math.pi#Here the values have been put by trial and error because I was unable to take the distance factor into account.
-                speed=4#How to know distance from obstacle :( ?
+                angle=angle_add*45/math.pi#Here the values have been put by trial and error because I was unable to take the distance factor into account.
+                speed=10#How to know distance from obstacle :( ?
                 flag=False
                 angle2=angle
-            elif(abs(angle)<4):
+            elif(abs(angle)<10):
                 speed=10*dist
                 if(abs(angle)<2):
                     angle2=0
@@ -98,7 +100,7 @@ def move():
         ans.linear.x=speed;
         ans.angular.z=angle2;
         director.publish(ans)
-        #print(angle)
+        print(angle)
 if __name__ == '__main__':
     rospy.init_node('scanner', anonymous=True)
     try:
